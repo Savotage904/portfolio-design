@@ -1,6 +1,7 @@
 import Link from "next/link";
 import VideoBackground from "@/components/VideoBackground";
 import { projects } from "@/data/projects"; // Importiamo i dati
+import FadeIn from "@/components/FadeIn";
 
 export default function Home() {
   return (
@@ -21,35 +22,43 @@ export default function Home() {
       </section>
 
       {/* SEZIONE 2: SELECTED WORKS (Griglia) */}
-      <section className="py-24 px-8 max-w-7xl mx-auto">
+      <section id="work" className="py-24 px-8 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-12 border-b border-gray-800 pb-4">
           SELECTED WORKS
         </h2>
 
         {/* GRIGLIA BENTO / MASONRY */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <Link
-              href={`/work/${project.slug}`}
-              key={project.id}
-              className="group block relative aspect-video bg-gray-900 overflow-hidden border border-gray-800 hover:border-white transition-colors"
-            >
-              {/* Immagine di sfondo (o placeholder grigio se non c'è) */}
-              <div 
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105 opacity-60 group-hover:opacity-100"
-                style={{ backgroundImage: `url(${project.imageUrl})` }}
-              />
-              
-              {/* Testo sopra l'immagine */}
-              <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent">
-                <h3 className="text-xl font-bold text-white mb-1">
-                  {project.title}
-                </h3>
-                <p className="text-sm text-gray-400 font-mono">
-                  {project.category}
-                </p>
-              </div>
-            </Link>
+          {projects.map((project, index) => (
+            // Avvolgiamo tutto in FadeIn e usiamo l'index per ritardare l'animazione
+            // Il primo parte subito, il secondo dopo 0.1s, il terzo dopo 0.2s...
+            <FadeIn key={project.id} delay={index * 0.1}>
+              <Link
+                href={`/work/${project.slug}`}
+                className="group block relative aspect-video bg-gray-900 overflow-hidden border border-gray-800 hover:border-white transition-colors"
+              >
+                {/* VIDEO DI SFONDO (Sostituisce l'immagine) */}
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                >
+                  <source src={project.videoUrl} type="video/mp4" />
+                </video>
+                
+                {/* Overlay sfumato per leggere il testo */}
+                <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent z-10">
+                  <h3 className="text-xl font-bold text-white mb-1">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-gray-400 font-mono">
+                    {project.category}
+                  </p>
+                </div>
+              </Link>
+            </FadeIn>
           ))}
         </div>
       </section>

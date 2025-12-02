@@ -1,23 +1,23 @@
-// Definiamo la forma che deve avere ogni progetto
 export interface Project {
   id: string;
   title: string;
   category: string;
   year: string;
   description: string;
-  imageUrl: string; // Per ora usiamo immagini statiche, poi video
-  slug: string; // La parte finale dell'URL (es: /work/serata-logic)
+  imageUrl: string; 
+  videoUrl: string; // <--- NUOVO CAMPO
+  slug: string;
 }
 
-// Il nostro "Database"
 export const projects: Project[] = [
   {
     id: "1",
     title: "Logic Event 2024",
     category: "VFX / Event Recap",
     year: "2024",
-    description: "Recap dell'evento Logic ai Magazzini Generali. Focus su glitch art e ritmo serrato.",
-    imageUrl: "/projects/logic-cover.jpg", // Dovremo creare questa cartella
+    description: "Recap dell'evento Logic...",
+    imageUrl: "/projects/logic-cover.jpg",
+    videoUrl: "/projects/logic.mp4", // <--- Assicurati che il file esista qui
     slug: "logic-event-2024",
   },
   {
@@ -25,8 +25,9 @@ export const projects: Project[] = [
     title: "Polimi Thesis",
     category: "Engineering / Research",
     year: "2023",
-    description: "Visualizzazione dati per la tesi di laurea. Python + TouchDesigner.",
+    description: "Visualizzazione dati...",
     imageUrl: "/projects/thesis-cover.jpg",
+    videoUrl: "/projects/thesis.mp4", // <---
     slug: "polimi-thesis",
   },
   {
@@ -34,8 +35,9 @@ export const projects: Project[] = [
     title: "Urban Flow",
     category: "Videomaking",
     year: "2024",
-    description: "Street photography in movimento. Studio sulla luce urbana.",
+    description: "Street photography...",
     imageUrl: "/projects/urban.jpg",
+    videoUrl: "/projects/urban.mp4", // <---
     slug: "urban-flow",
   },
 ];

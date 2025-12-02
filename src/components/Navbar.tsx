@@ -10,7 +10,7 @@ export default function Navbar() {
 
       {/* MENU LINKS */}
       <div className="flex gap-8 text-sm font-medium">
-        <Link href="/" className="hover:text-gray-400 transition-colors">
+        <Link href="/work" className="hover:text-gray-400 transition-colors">
           WORK
         </Link>
         <Link href="/about" className="hover:text-gray-400 transition-colors">
